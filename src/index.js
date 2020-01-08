@@ -1,1 +1,11 @@
-console.log('Entry point'); // eslint-disable-line
+import '../sass/index.scss';
+
+function component() {
+    const element = document.createElement('div');
+
+    element.innerHTML = `Hello webpack!`;
+
+    return element;
+}
+
+document.body.appendChild(component());
