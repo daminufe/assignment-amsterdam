@@ -35,19 +35,22 @@ class Main {
     }
 
     renderResultsContainer(parent, content = null) {
-        let container = document.getElementById('results-container');
+        let container = document.getElementById('results-header');
         if (!container) {
             container = document.createElement('div');
             container.padding = '1rem';
-            container.id = 'results-container';
+            container.id = 'results-header';
             const title = document.createElement('h2');
             title.innerText = 'Search results';
             container.appendChild(title);
+            const lc = document.createElement('div');
+            lc.className = 'list';
             parent.appendChild(container);
+            parent.appendChild(lc);
         }
 
         if (isElement(content)) {
-            container.removeChild(document.querySelector('#results-container > p'));
+            container.removeChild(document.querySelector('#results-header > p'));
             container.appendChild(content);
         } else if (!content) {
             const p = document.createElement('p');
@@ -61,17 +64,42 @@ class Main {
     }
 
     handleSearch(results) {
-        const container = document.getElementById('results-container');
+        const container = document.getElementById('results-header');
         const p = document.createElement('p');
         if (results.length > 0) {
             p.innerText = `${results.length} results found!`;
+            this.renderResults(results);
         } else {
+            this.clearResults();
             p.innerText = `No results found!`;
         }
 
         this.renderResultsContainer(null, p);
 
         return container;
+    }
+
+    renderResults(results) {
+        const listContainer = document.querySelector('div.list');
+        this.clearResults();
+        results.sort(({ scoreA }, {scoreB}) => scoreB - scoreA);
+        results.forEach(result => {
+            listContainer.appendChild(this.buildResultItem(result));
+        })
+    }
+
+    buildResultItem({ flightNumber, airport, originalTime, expectedTime }) {
+        const el = document.createElement('p');
+        el.innerText = `Flight ${flightNumber} to ${airport} departs at ${expectedTime}`;
+
+        return el;
+    }
+
+    clearResults() {
+        const listContainer = document.querySelector('div.list');
+        while (listContainer.firstChild) {
+            listContainer.removeChild(listContainer.firstChild);
+        }
     }
 }
 
