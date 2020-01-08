@@ -1,3 +1,16 @@
+# To run the project
+
+Please run `npm i` to install all the dependencies.
+
+`npm start` to start the development environment as well as the mock server.
+
+**Comment:** I didn't have much time as this week I am very busy, so I didn't make it look pretty, and I noticed I couldn't use the components as they are a NPM private repo.
+
+**Tests:** I didn't make the tests, as I said for lack of time to finish it. I can talk about my experience with unit tests with Jest.
+
+Thanks!
+
+
 # Assignment
 
 Please create a page that contains an input field.
