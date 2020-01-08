@@ -9,13 +9,8 @@ function isElement(element) {
 class Main {
     constructor() {
         this.container = document.createElement('div');
-
         this.buildInput(this.container);
-
-        // const t = document.createElement('h2');
-        // t.innerText = 'found results!!';
         this.renderResultsContainer(this.container);
-
         return this.container;
     }
 
@@ -25,7 +20,6 @@ class Main {
         input['data-input'] = 'true';
         input.type = 'text';
         input.placeholder = 'For example: KL1001, KLM or London';
-
         parent.appendChild(input);
 
         input.addEventListener('keyup', async el => {
